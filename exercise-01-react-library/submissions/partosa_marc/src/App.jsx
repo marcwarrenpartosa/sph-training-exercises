@@ -1,9 +1,12 @@
 import { useState } from "react";
 
+//pages
+import BookList from "./pages/BookList.jsx";
+
 function App() {
   return (
     <>
-      <div className="text-red-500">test</div>
+      <BookList></BookList>
     </>
   );
 }

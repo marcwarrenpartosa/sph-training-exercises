@@ -5,19 +5,17 @@ import { useEffect } from "react";
 import BookCard from "../components/card.jsx";
 
 //services
-import getBooks from "../services/books.js";
+import fetchBooks from "../services/books.js";
 import data from "../db/data.js";
+
+//utils
+import getAuthor from "../utils/get-author.js";
 
 //This page allows the user to browse the list of books in the library.
 const BookList = () => {
-  const books = getBooks();
+  const books = fetchBooks();
 
-  // Helper function to get author information
-  const getAuthor = (authorId) => {
-    return data.Authors.find((author) => author.id === authorId);
-  };
-
-  console.log(books);
+  //console.log(books);
 
   return (
     <div className="container mx-auto px-4 py-8">

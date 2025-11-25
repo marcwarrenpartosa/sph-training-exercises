@@ -83,16 +83,40 @@ function CardFooter({ className, ...props }) {
 }
 
 const BookCard = ({ book, author }) => {
+  const defaultImage = "https://via.placeholder.com/300x400?text=No+Image";
+
+  const getImageUrl = (imagePath) => {
+    if (!imagePath) return defaultImage;
+
+    if (imagePath.startsWith("http")) return imagePath;
+
+    try {
+      if (imagePath.startsWith("../assets/")) {
+        const assetPath = imagePath.replace("../assets/", "/src/assets/");
+        return new URL(assetPath, import.meta.url).href;
+      }
+
+      return imagePath;
+    } catch (error) {
+      return defaultImage;
+    }
+  };
+
+  const bookImage = getImageUrl(book.image);
+
+  const handleImageError = (e) => {
+    if (e.target.src !== defaultImage) {
+      e.target.src = defaultImage;
+    }
+  };
+
   return (
     <Card className="w-full max-w-sm mx-auto">
-      <div className="w-full h-64 overflow-hidden rounded-t-xl">
+      <div className="w-full h-64 overflow-hidden rounded-t-xl bg-gray-200">
         <img
-          src={book.image}
+          src={bookImage}
           alt={book.title}
           className="w-full h-full object-cover"
-          onError={(e) => {
-            e.target.src = "https://via.placeholder.com/300x400?text=No+Image";
-          }}
         />
       </div>
       <CardHeader>
