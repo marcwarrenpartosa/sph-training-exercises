@@ -1,5 +1,6 @@
 import Data from "../db/data.js"
 
-export default function getAuthors() {
+//fetches all authors in the database
+export default function fetchAuthors() {
     return Data.Authors;
 }
