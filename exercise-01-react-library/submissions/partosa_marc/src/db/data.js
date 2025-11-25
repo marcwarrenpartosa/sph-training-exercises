@@ -203,4 +203,4 @@ const Transactions = [
 ];
 
 
-export default { Books, Authors, Members };
+export default { Books, Authors, Members, Transactions };

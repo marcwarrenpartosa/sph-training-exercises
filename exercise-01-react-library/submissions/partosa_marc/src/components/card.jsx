@@ -82,7 +82,7 @@ function CardFooter({ className, ...props }) {
   );
 }
 
-const BookCard = ({ book, author }) => {
+const BookCard = ({ book, author, borrowedBy = null }) => {
   const defaultImage = "https://via.placeholder.com/300x400?text=No+Image";
 
   const getImageUrl = (imagePath) => {
@@ -117,6 +117,7 @@ const BookCard = ({ book, author }) => {
           src={bookImage}
           alt={book.title}
           className="w-full h-full object-cover"
+          onError={handleImageError}
         />
       </div>
       <CardHeader>
@@ -135,6 +136,12 @@ const BookCard = ({ book, author }) => {
             <span className="font-medium">Book ID: </span>
             <span className="text-gray-700">{book.id}</span>
           </div>
+          {borrowedBy && (
+            <div className="text-sm">
+              <span className="font-medium">Borrowed by: </span>
+              <span className="text-gray-700">{borrowedBy.name}</span>
+            </div>
+          )}
         </div>
       </CardContent>
     </Card>

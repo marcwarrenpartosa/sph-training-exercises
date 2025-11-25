@@ -5,15 +5,16 @@ import { useEffect } from "react";
 import BookCard from "../components/card.jsx";
 
 //services
-import fetchBooks from "../services/books.js";
-import data from "../db/data.js";
+import fetchBooks from "../services/fetchBooks.js";
+import fetchAuthors from "../services/fetchAuthors.js";
 
 //utils
-import getAuthor from "../utils/get-author.js";
+import getAuthor from "../utils/author.js";
 
 //This page allows the user to browse the list of books in the library.
 const BookList = () => {
   const books = fetchBooks();
+  const authors = fetchAuthors();
 
   //console.log(books);
 
@@ -25,7 +26,7 @@ const BookList = () => {
           <BookCard
             key={book.id}
             book={book}
-            author={getAuthor(book.authorId)}
+            author={getAuthor(book.authorId, authors)}
           />
         ))}
       </div>
