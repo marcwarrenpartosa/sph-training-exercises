@@ -41,7 +41,6 @@ const SearchBar = ({ onSearch, onClear, placeholder = "Search..." }) => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           onKeyDown={handleKeyDown}
-          onKeyPress={handleKeyDown}
           onFocus={handleFocus}
           onBlur={handleBlur}
           className="border-0 shadow-none focus:ring-0"
@@ -56,7 +55,7 @@ const SearchBar = ({ onSearch, onClear, placeholder = "Search..." }) => {
             <X className="w-4 h-4 text-gray-500" />
           </Button>
         )}
-        <Button onClick={handleSearch} className="shrink-0">
+        <Button onClick={handleSearch} className="shrink-0 ">
           <Search className="w-5 h-5"></Search>
         </Button>
       </div>

@@ -1,11 +1,9 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Search, X } from "lucide-react";
 
 //components
 import BookCard from "./card.jsx";
-import Button from "./button.jsx";
-import Input from "./input.jsx";
+import SearchBar from "./searchBar.jsx";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "./tabs.jsx";
 
 //services
@@ -21,10 +19,8 @@ import { getBookCategories } from "../utils/getBookcategories.js";
 const BookList = () => {
   const books = fetchBooks();
   const authors = fetchAuthors();
-  const [searchQuery, setSearchQuery] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
-  const [isSearchFocused, setIsSearchFocused] = useState(false);
 
   const bookCategories = getBookCategories(books);
 
@@ -34,70 +30,22 @@ const BookList = () => {
     return book.category === activeCategory;
   });
 
-  const handleSearch = () => {
-    setSearchTerm(searchQuery);
+  const handleSearch = (query) => {
+    setSearchTerm(query);
   };
 
   const handleClear = () => {
-    setSearchQuery("");
     setSearchTerm("");
   };
-
-  const handleFocus = () => {
-    setIsSearchFocused(true);
-  };
-
-  const handleBlur = () => {
-    setIsSearchFocused(false);
-  };
-
-  //allows user to press enter key to search
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
-  };
-
-  //console.log(books);
 
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="w-full px-4 py-8">
-        {/*  <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Book Library
-          </h1>
-          <p className="text-gray-600">Discover and explore our collection</p>
-        </div> */}
-
-        <div className="mb-4 max-w-md mx-auto">
-          <div className="flex gap-2 items-center bg-white rounded-lg shadow-sm border border-gray-200 p-2">
-            <Input
-              type="text"
-              placeholder="Search for books..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={handleKeyDown}
-              onKeyPress={handleKeyDown}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-              className="border-0 shadow-none focus:ring-0"
-            />
-            {searchQuery && (
-              <Button
-                onMouseDown={handleClear}
-                variant="ghost"
-                size="sm"
-                className="shrink-0 h-8 w-8 p-0 hover:bg-gray-100"
-              >
-                <X className="w-4 h-4 text-gray-500" />
-              </Button>
-            )}
-            <Button onClick={handleSearch} className="shrink-0">
-              <Search className="w-5 h-5"></Search>
-            </Button>
-          </div>
-        </div>
+        <SearchBar
+          onSearch={handleSearch}
+          onClear={handleClear}
+          placeholder="Search for books..."
+        />
 
         {/* Search Results Indicator */}
         {searchTerm && (
