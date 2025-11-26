@@ -1,7 +1,7 @@
 import React from "react";
 import Logo from "../assets/images/logo.png";
 
-import { ChevronDown, Plus, MoreHorizontal } from "lucide-react";
+import { Plus, MoreHorizontal } from "lucide-react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -37,44 +37,9 @@ const Navbar = () => {
             }}
           >
             <img src={Logo} alt="Logo" className="w-8 sm:w-10" />
-            <div className="font-semibold text-gray-900 hidden sm:block">
-              Owla Library
-            </div>
+            <div className="font-semibold text-gray-900 ">Owla Library</div>
           </div>
-          <div className="hidden sm:flex sm:items-center sm:gap-3">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <div className="cursor-pointer hover:bg-gray-50 px-2 sm:px-3 py-2 ml-3 sm:ml-6 rounded-md transition-colors">
-                  <div className="flex items-center gap-1 text-gray-700 font-medium">
-                    <span className="hidden text-sm sm:inline">Books</span>
-                    <span className="sm:hidden text-sm">Books</span>
-                    <ChevronDown className="w-4 h-4 text-gray-700"></ChevronDown>
-                  </div>
-                </div>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem
-                  className="cursor-pointer"
-                  onClick={() => navigateToAllBooks()}
-                >
-                  All Books
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  className="cursor-pointer"
-                  onClick={() => navigateToBorrowedBooks()}
-                >
-                  {" "}
-                  Borrowed
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <Button
-              variant="ghost"
-              className="text-gray-700 text-sm font-medium hover:bg-gray-50 hidden md:flex"
-            >
-              Members
-            </Button>
-          </div>
+          <div className="hidden sm:flex sm:items-center sm:gap-3"></div>
         </div>
 
         <div className="flex items-center">

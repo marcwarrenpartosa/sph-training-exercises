@@ -123,80 +123,90 @@ const Transactions = [
     {
         id: "TR-1",
         bookId: "BK-1",                    // Harry Potter 1
-        memberId: "MB-1",                  // Borrowed by Alice Johnson
+        memberId: "MB-1",
         borrowDate: "2024-01-10T09:15",
+        expectedReturnDate: "2024-01-24T09:15",
         returnDate: "2024-01-20T14:30",
         status: "returned"
     },
     {
         id: "TR-2",
         bookId: "BK-3",                    // The Lord of the Rings
-        memberId: "MB-2",                  // Borrowed by Bob Smith
+        memberId: "MB-2",
         borrowDate: "2024-02-05T11:45",
-        returnDate: null,                  // Still borrowed
+        expectedReturnDate: "2024-02-19T11:45",
+        returnDate: null,
         status: "borrowed"
     },
     {
         id: "TR-3",
         bookId: "BK-7",                    // A Tale of Two Cities
-        memberId: "MB-3",                  // Borrowed by Charlie Brown
+        memberId: "MB-3",
         borrowDate: "2024-03:12T10:20",
+        expectedReturnDate: "2024-03-26T10:20",
         returnDate: "2024-03-25T16:50",
         status: "returned"
     },
     {
         id: "TR-4",
         bookId: "BK-10",                   // Through the Looking-Glass
-        memberId: "MB-1",                  // Borrowed by Alice Johnson
+        memberId: "MB-1",
         borrowDate: "2024-04-01T13:10",
+        expectedReturnDate: "2024-04-15T13:10",
         returnDate: null,
         status: "borrowed"
     },
     {
         id: "TR-5",
         bookId: "BK-5",                    // And Then There Were None
-        memberId: "MB-2",                  // Borrowed by Bob Smith
+        memberId: "MB-2",
         borrowDate: "2024-04-10T09:00",
+        expectedReturnDate: "2024-04-24T09:00",
         returnDate: "2024-04-18T15:25",
         status: "returned"
     },
     {
         id: "TR-6",
         bookId: "BK-2",                    // Harry Potter 2
-        memberId: "MB-3",                  // Borrowed by Charlie Brown
+        memberId: "MB-3",
         borrowDate: "2024-05-01T14:45",
+        expectedReturnDate: "2024-05-15T14:45",
         returnDate: null,
         status: "borrowed"
     },
     {
         id: "TR-7",
         bookId: "BK-4",                    // The Hobbit
-        memberId: "MB-1",                  // Borrowed by Alice Johnson
+        memberId: "MB-1",
         borrowDate: "2024-05-12T10:05",
+        expectedReturnDate: "2024-05-26T10:05",
         returnDate: "2024-05-30T17:40",
         status: "returned"
     },
     {
         id: "TR-8",
         bookId: "BK-8",                    // Great Expectations
-        memberId: "MB-3",                  // Borrowed by Charlie Brown
+        memberId: "MB-3",
         borrowDate: "2024-06-02T09:30",
+        expectedReturnDate: "2027-06-16T09:30",
         returnDate: null,
         status: "borrowed"
     },
     {
         id: "TR-9",
         bookId: "BK-6",                    // Murder on the Orient Express
-        memberId: "MB-2",                  // Borrowed by Bob Smith
+        memberId: "MB-2",
         borrowDate: "2024-06-15T11:10",
+        expectedReturnDate: "2024-06-28T11:10", // must NOT exceed actual return date
         returnDate: "2024-06-28T14:55",
         status: "returned"
     },
     {
         id: "TR-10",
         bookId: "BK-9",                    // Alice's Adventures in Wonderland
-        memberId: "MB-1",                  // Borrowed by Alice Johnson
+        memberId: "MB-1",
         borrowDate: "2024-07-03T16:25",
+        expectedReturnDate: "2024-07-17T16:25",
         returnDate: null,
         status: "borrowed"
     }

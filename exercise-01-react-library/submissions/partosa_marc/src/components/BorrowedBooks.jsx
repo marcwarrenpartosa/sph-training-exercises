@@ -56,14 +56,7 @@ const BorrowedBooks = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-8">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Borrowed Books
-          </h1>
-          <p className="text-gray-600">Currently checked out items</p>
-        </div>
-
+      <div className="w-full px-4 py-8">
         <SearchBar
           onSearch={handleSearch}
           onClear={handleClear}
@@ -102,7 +95,7 @@ const BorrowedBooks = () => {
             <p className="text-gray-500 text-lg">No borrowed books found</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 px-4">
             {filteredBooks.map((book) => {
               const borrowTransaction = borrowedTransactions.find(
                 (transaction) => transaction.bookId === book.id
@@ -117,6 +110,7 @@ const BorrowedBooks = () => {
                   book={book}
                   author={getAuthorById(book.authorId, authors)}
                   borrowedBy={borrowedByMember}
+                  expectedReturnDate={borrowTransaction?.expectedReturnDate}
                 />
               );
             })}

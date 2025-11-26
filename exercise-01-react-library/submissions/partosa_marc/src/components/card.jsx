@@ -1,9 +1,33 @@
 /* This card, card header, card body, and card footer are imported from shadcn */
 
 import React from "react";
+import { Clock } from "lucide-react";
+
+import isBookOverdue from "../utils/overdueChecker";
 
 // Simple utility function for conditional class names
 const cn = (...classes) => classes.filter(Boolean).join(" ");
+
+// Simple warning icon component
+const WarningIcon = () => (
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="bg-red-500 text-white rounded-full"
+  >
+    <circle cx="12" cy="12" r="10" fill="#ef4444" />
+    <path
+      d="M12 8v4M12 16h.01"
+      stroke="white"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
 function Card({ className, ...props }) {
   return (
@@ -84,7 +108,12 @@ function CardFooter({ className, ...props }) {
   );
 }
 
-const BookCard = ({ book, author, borrowedBy = null }) => {
+const BookCard = ({
+  book,
+  author,
+  borrowedBy = null,
+  expectedReturnDate = null,
+}) => {
   const defaultImage = "https://via.placeholder.com/300x400?text=No+Image";
 
   const getImageUrl = (imagePath) => {
@@ -112,8 +141,21 @@ const BookCard = ({ book, author, borrowedBy = null }) => {
     }
   };
 
+  // Check if book is overdue when borrowed
+  const isOverdue =
+    borrowedBy && expectedReturnDate && isBookOverdue(expectedReturnDate);
+
   return (
-    <div className="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden h-full flex flex-col">
+    <div className="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden h-full flex flex-col relative">
+      {isOverdue && (
+        <div
+          className="flex  items-center gap-2 absolute top-2 right-2 z-10 bg-red-700 p-1 px-2 rounded-full text-sm text-red-200"
+          title="Book is overdue"
+        >
+          Overdue
+          <Clock className="text-white w-4 h-4"></Clock>
+        </div>
+      )}
       <div className="aspect-3/4 overflow-hidden bg-gray-50 shrink-0">
         <img
           src={bookImage}
@@ -148,11 +190,13 @@ const BookCard = ({ book, author, borrowedBy = null }) => {
           </div>
           {borrowedBy && (
             <div className="pt-1 border-t border-gray-100">
-              <div className="flex justify-between h-4">
+              <div className="flex justify-between items-center h-4">
                 <span className="text-gray-500">Borrowed by:</span>
-                <span className="text-blue-600 font-medium truncate ml-2">
-                  {borrowedBy.name}
-                </span>
+                <div className="flex items-center gap-1 ml-2">
+                  <span className="text-gray-700 font-medium truncate">
+                    {borrowedBy.name}
+                  </span>
+                </div>
               </div>
             </div>
           )}
