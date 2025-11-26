@@ -113,6 +113,7 @@ const BookCard = ({
   author,
   borrowedBy = null,
   expectedReturnDate = null,
+  onMemberClick = null,
 }) => {
   const defaultImage = "https://via.placeholder.com/300x400?text=No+Image";
 
@@ -193,7 +194,10 @@ const BookCard = ({
               <div className="flex justify-between items-center h-4">
                 <span className="text-gray-500">Borrowed by:</span>
                 <div className="flex items-center gap-1 ml-2">
-                  <span className="text-gray-700 font-medium truncate hover:underline cursor-pointer">
+                  <span
+                    className="text-gray-700 font-medium truncate hover:underline cursor-pointer"
+                    onClick={() => onMemberClick && onMemberClick(borrowedBy)}
+                  >
                     {borrowedBy.name}
                   </span>
                 </div>

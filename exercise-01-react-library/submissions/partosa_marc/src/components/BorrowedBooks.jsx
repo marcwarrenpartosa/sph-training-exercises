@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import BookCard from "./card.jsx";
 import SearchBar from "./searchBar.jsx";
 import { Tabs, TabsList, TabsTrigger } from "./tabs.jsx";
+import MemberModal from "./MemberHistory.jsx";
 
 //services
 import fetchTransactions from "../services/fetchTransactions.js";
@@ -24,6 +25,8 @@ const BorrowedBooks = () => {
 
   const [searchTerm, setSearchTerm] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
+  const [selectedMember, setSelectedMember] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Filter transactions to get only borrowed books
   const borrowedTransactions = transactions.filter(
@@ -52,6 +55,16 @@ const BorrowedBooks = () => {
 
   const handleClear = () => {
     setSearchTerm("");
+  };
+
+  const handleMemberClick = (member) => {
+    setSelectedMember(member);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedMember(null);
   };
 
   return (
@@ -111,12 +124,22 @@ const BorrowedBooks = () => {
                   author={getAuthorById(book.authorId, authors)}
                   borrowedBy={borrowedByMember}
                   expectedReturnDate={borrowTransaction?.expectedReturnDate}
+                  onMemberClick={handleMemberClick}
                 />
               );
             })}
           </div>
         )}
       </div>
+
+      {/* Member History Modal */}
+      <MemberModal
+        selectedMember={selectedMember}
+        isModalOpen={isModalOpen}
+        onClose={handleCloseModal}
+        transactions={transactions}
+        books={books}
+      />
     </div>
   );
 };
