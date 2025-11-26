@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 
 //components
 import BookCard from "./card.jsx";
@@ -24,6 +24,7 @@ const BookList = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
 
   const bookCategories = getBookCategories(books);
 
@@ -35,6 +36,19 @@ const BookList = () => {
 
   const handleSearch = () => {
     setSearchTerm(searchQuery);
+  };
+
+  const handleClear = () => {
+    setSearchQuery("");
+    setSearchTerm("");
+  };
+
+  const handleFocus = () => {
+    setIsSearchFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsSearchFocused(false);
   };
 
   //allows user to press enter key to search
@@ -57,7 +71,7 @@ const BookList = () => {
         </div> */}
 
         <div className="mb-4 max-w-md mx-auto">
-          <div className="flex gap-2 bg-white rounded-lg shadow-sm border border-gray-200 p-2">
+          <div className="flex gap-2 items-center bg-white rounded-lg shadow-sm border border-gray-200 p-2">
             <Input
               type="text"
               placeholder="Search for books..."
@@ -65,8 +79,20 @@ const BookList = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={handleKeyDown}
               onKeyPress={handleKeyDown}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
               className="border-0 shadow-none focus:ring-0"
             />
+            {searchQuery && (
+              <Button
+                onMouseDown={handleClear}
+                variant="ghost"
+                size="sm"
+                className="shrink-0 h-8 w-8 p-0 hover:bg-gray-100"
+              >
+                <X className="w-4 h-4 text-gray-500" />
+              </Button>
+            )}
             <Button onClick={handleSearch} className="shrink-0">
               <Search className="w-5 h-5"></Search>
             </Button>
