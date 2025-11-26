@@ -1,6 +1,6 @@
 
 //this function gets the details of the member using the id
-const getMember = (memberId, members = []) => {
+const getMemberById = (memberId, members = []) => {
   return members.find((member) => member.id === memberId);
 };
 

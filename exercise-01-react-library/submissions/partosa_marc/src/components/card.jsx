@@ -111,8 +111,8 @@ const BookCard = ({ book, author, borrowedBy = null }) => {
   };
 
   return (
-    <Card className="w-full max-w-sm mx-auto">
-      <div className="w-full h-64 overflow-hidden rounded-t-xl bg-gray-200">
+    <div className="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden h-full flex flex-col">
+      <div className="aspect-3/4 overflow-hidden bg-gray-50 shrink-0">
         <img
           src={bookImage}
           alt={book.title}
@@ -120,31 +120,44 @@ const BookCard = ({ book, author, borrowedBy = null }) => {
           onError={handleImageError}
         />
       </div>
-      <CardHeader>
-        <CardTitle className="text-lg font-bold">{book.title}</CardTitle>
-        <CardDescription className="text-sm text-gray-600">
-          by {author?.name || "Unknown Author"}
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-2">
-          <div className="text-sm">
-            <span className="font-medium">Category: </span>
-            <span className="text-gray-700">{book.category}</span>
+
+      <div className="p-4 flex flex-col grow">
+        <div className="grow">
+          <h3 className="font-semibold text-gray-900 text-sm leading-tight mb-1 h-8 line-clamp-2">
+            {book.title}
+          </h3>
+          <p className="text-xs text-gray-600 mb-3 h-4 truncate">
+            {author?.name || "Unknown Author"}
+          </p>
+        </div>
+
+        <div className="space-y-1.5 text-xs mt-auto">
+          <div className="flex justify-between h-4">
+            <span className="text-gray-500">Category:</span>
+            <span className="text-gray-700 font-medium truncate ml-2">
+              {book.category}
+            </span>
           </div>
-          <div className="text-sm">
-            <span className="font-medium">Book ID: </span>
-            <span className="text-gray-700">{book.id}</span>
+          <div className="flex justify-between h-4">
+            <span className="text-gray-500">ID:</span>
+            <span className="text-gray-700 font-mono truncate ml-2">
+              {book.id}
+            </span>
           </div>
           {borrowedBy && (
-            <div className="text-sm">
-              <span className="font-medium">Borrowed by: </span>
-              <span className="text-gray-700">{borrowedBy.name}</span>
+            <div className="pt-1 border-t border-gray-100">
+              <div className="flex justify-between h-4">
+                <span className="text-gray-500">Borrowed by:</span>
+                <span className="text-blue-600 font-medium truncate ml-2">
+                  {borrowedBy.name}
+                </span>
+              </div>
             </div>
           )}
+          {!borrowedBy && <div className="h-6"></div>}
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };
 

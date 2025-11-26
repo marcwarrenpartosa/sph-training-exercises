@@ -1,6 +1,6 @@
 // this function gets the author of a book by authorId
-const getAuthor = (authorId, authors) => {
+const getAuthorById = (authorId, authors) => {
   return authors.find((author) => author.id === authorId);
 };
 
-export default getAuthor;
+export default getAuthorById;

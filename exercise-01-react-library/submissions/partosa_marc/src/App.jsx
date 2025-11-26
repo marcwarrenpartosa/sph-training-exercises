@@ -1,15 +1,12 @@
 import { useState } from "react";
 
 //pages
-import BookList from "./pages/BookList.jsx";
-import BorrowedBooks from "./pages/BorrowedBooks.jsx";
+import BrowseBooks from "./pages/browseBooks.jsx";
 
 function App() {
   return (
     <>
-      <BookList></BookList>
-
-      {/*   <BorrowedBooks></BorrowedBooks> */}
+      <BrowseBooks></BrowseBooks>
     </>
   );
 }
