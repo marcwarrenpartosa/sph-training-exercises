@@ -193,7 +193,7 @@ const BookCard = ({
               <div className="flex justify-between items-center h-4">
                 <span className="text-gray-500">Borrowed by:</span>
                 <div className="flex items-center gap-1 ml-2">
-                  <span className="text-gray-700 font-medium truncate">
+                  <span className="text-gray-700 font-medium truncate hover:underline cursor-pointer">
                     {borrowedBy.name}
                   </span>
                 </div>
