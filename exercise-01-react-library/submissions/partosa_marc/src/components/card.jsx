@@ -1,3 +1,5 @@
+/* This card, card header, card body, and card footer are imported from shadcn */
+
 import React from "react";
 
 // Simple utility function for conditional class names

@@ -10,7 +10,6 @@ const BrowseBooks = () => {
   return (
     <>
       <BookList></BookList>
-      <BorrowedBooks></BorrowedBooks>
     </>
   );
 };
