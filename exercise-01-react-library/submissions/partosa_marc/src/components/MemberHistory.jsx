@@ -8,6 +8,7 @@ const MemberModal = ({
   onClose,
   transactions,
   books,
+  onMarkAsReturned,
 }) => {
   if (!selectedMember) return null;
 
@@ -151,6 +152,20 @@ const MemberModal = ({
                                 </div>
                               )}
                             </div>
+                            {/* Mark as Returned Button */}
+                            {(transaction.status === "borrowed" || isOverdue) &&
+                              onMarkAsReturned && (
+                                <div className="mt-3 pt-3 border-t border-gray-200">
+                                  <button
+                                    onClick={() =>
+                                      onMarkAsReturned(transaction.id)
+                                    }
+                                    className="w-full px-3 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors"
+                                  >
+                                    Mark as Returned
+                                  </button>
+                                </div>
+                              )}
                           </div>
                         </div>
                       </div>
