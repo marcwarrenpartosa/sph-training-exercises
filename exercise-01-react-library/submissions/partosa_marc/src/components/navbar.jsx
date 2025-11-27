@@ -7,7 +7,7 @@ import { BookOpenText, Users } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 //components
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "./tabs.jsx";
+import { NavbarTabs, NavbarTabsList, NavbarTabsTrigger } from "./tabs.jsx";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -40,16 +40,16 @@ const Navbar = () => {
           <div className="hidden sm:flex sm:items-center sm:gap-3"></div>
         </div>
 
-        <Tabs defaultValue="books" className="flex items-center">
-          <TabsList className="flex gap-2">
-            <TabsTrigger value="books" onClick={navigateToAllBooks}>
+        <NavbarTabs defaultValue="books" className="flex items-center">
+          <NavbarTabsList className="flex gap-2">
+            <NavbarTabsTrigger value="books" onClick={navigateToAllBooks}>
               <BookOpenText className="w-4 h-4" />
-            </TabsTrigger>
-            <TabsTrigger value="members" onClick={navigateToMembers}>
+            </NavbarTabsTrigger>
+            <NavbarTabsTrigger value="members" onClick={navigateToMembers}>
               <Users className="w-4 h-4" />
-            </TabsTrigger>
-          </TabsList>
-        </Tabs>
+            </NavbarTabsTrigger>
+          </NavbarTabsList>
+        </NavbarTabs>
       </div>
     </div>
   );

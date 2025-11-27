@@ -76,54 +76,78 @@ const MemberModal = ({
                         key={transaction.id}
                         className="bg-gray-50 rounded-lg border border-gray-200 p-4 hover:shadow-sm transition-shadow"
                       >
-                        <div className="flex justify-between items-start mb-3">
-                          <h4 className="font-medium text-gray-900 leading-tight">
-                            {book?.title || "Unknown Book"}
-                          </h4>
-                          <Badge
-                            status={transaction.status}
-                            isOverdue={isOverdue}
-                          />
-                        </div>
-                        <div className="space-y-2 text-sm text-gray-600">
-                          <div className="flex justify-between">
-                            <span className="text-gray-500">Book ID:</span>
-                            <span className="font-medium">
-                              {transaction.bookId}
-                            </span>
+                        <div className="flex gap-4">
+                          {/* Book Image */}
+                          <div className="shrink-0 ">
+                            <img
+                              src={
+                                book?.image
+                                  ? new URL(book.image, import.meta.url).href
+                                  : "https://via.placeholder.com/64x80/e5e7eb/9ca3af?text=Book"
+                              }
+                              alt={book?.title || "Book cover"}
+                              className="w-16 h-20 object-cover rounded-md shadow-sm border"
+                              onError={(e) => {
+                                e.target.src =
+                                  "https://via.placeholder.com/64x80/e5e7eb/9ca3af?text=Book";
+                              }}
+                            />
                           </div>
-                          <div className="flex justify-between">
-                            <span className="text-gray-500">Borrowed:</span>
-                            <span className="font-medium">
-                              {new Date(
-                                transaction.borrowDate
-                              ).toLocaleDateString()}
-                            </span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-gray-500">
-                              Expected Return:
-                            </span>
-                            <span
-                              className={`font-medium ${
-                                isOverdue ? "text-red-600" : ""
-                              }`}
-                            >
-                              {new Date(
-                                transaction.expectedReturnDate
-                              ).toLocaleDateString()}
-                            </span>
-                          </div>
-                          {transaction.returnDate && (
-                            <div className="flex justify-between">
-                              <span className="text-gray-500">Returned:</span>
-                              <span className="font-medium text-gray-600">
-                                {new Date(
-                                  transaction.returnDate
-                                ).toLocaleDateString()}
-                              </span>
+
+                          {/* Book Details */}
+                          <div className="flex-1 min-w-0">
+                            <div className="flex justify-between items-start mb-3">
+                              <h4 className="font-medium text-gray-900 leading-tight">
+                                {book?.title || "Unknown Book"}
+                              </h4>
+                              <Badge
+                                status={transaction.status}
+                                isOverdue={isOverdue}
+                              />
                             </div>
-                          )}
+                            <div className="space-y-2 text-sm text-gray-600">
+                              <div className="flex justify-between">
+                                <span className="text-gray-500">Book ID:</span>
+                                <span className="font-medium">
+                                  {transaction.bookId}
+                                </span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-500">Borrowed:</span>
+                                <span className="font-medium">
+                                  {new Date(
+                                    transaction.borrowDate
+                                  ).toLocaleDateString()}
+                                </span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-500">
+                                  Expected Return:
+                                </span>
+                                <span
+                                  className={`font-medium ${
+                                    isOverdue ? "text-red-600" : ""
+                                  }`}
+                                >
+                                  {new Date(
+                                    transaction.expectedReturnDate
+                                  ).toLocaleDateString()}
+                                </span>
+                              </div>
+                              {transaction.returnDate && (
+                                <div className="flex justify-between">
+                                  <span className="text-gray-500">
+                                    Returned:
+                                  </span>
+                                  <span className="font-medium text-gray-600">
+                                    {new Date(
+                                      transaction.returnDate
+                                    ).toLocaleDateString()}
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+                          </div>
                         </div>
                       </div>
                     );

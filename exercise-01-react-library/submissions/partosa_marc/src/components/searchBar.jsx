@@ -12,7 +12,12 @@ import {
   DropdownMenuItem,
 } from "./dropdown";
 
-const SearchBar = ({ onSearch, onClear, placeholder = "Search..." }) => {
+const SearchBar = ({
+  onSearch,
+  onClear,
+  placeholder = "Search...",
+  hideDropdown = false,
+}) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const navigate = useNavigate();
@@ -56,32 +61,34 @@ const SearchBar = ({ onSearch, onClear, placeholder = "Search..." }) => {
   return (
     <div className="mb-4 max-w-md mx-auto">
       <div className="flex gap-2 items-center bg-white rounded-lg shadow-sm border border-gray-200 p-2">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <div className="cursor-pointer hover:bg-gray-50 px-3 py-2 rounded-md transition-colors">
-              <div className="flex items-center gap-1 text-gray-700 font-medium">
-                <span className="text-sm whitespace-nowrap">
-                  {getCurrentDropdownText()}
-                </span>
-                <ChevronDown className="w-4 h-4 text-gray-700"></ChevronDown>
+        {!hideDropdown && (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <div className="cursor-pointer hover:bg-gray-50 px-3 py-2 rounded-md transition-colors">
+                <div className="flex items-center gap-1 text-gray-700 font-medium">
+                  <span className="text-sm whitespace-nowrap">
+                    {getCurrentDropdownText()}
+                  </span>
+                  <ChevronDown className="w-4 h-4 text-gray-700"></ChevronDown>
+                </div>
               </div>
-            </div>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuItem
-              className="cursor-pointer"
-              onClick={() => navigateToAllBooks()}
-            >
-              All Books
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              className="cursor-pointer"
-              onClick={() => navigateToBorrowedBooks()}
-            >
-              Borrowed
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem
+                className="cursor-pointer"
+                onClick={() => navigateToAllBooks()}
+              >
+                All Books
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                className="cursor-pointer"
+                onClick={() => navigateToBorrowedBooks()}
+              >
+                Borrowed
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
         <Input
           type="text"
           placeholder={placeholder}
@@ -102,7 +109,7 @@ const SearchBar = ({ onSearch, onClear, placeholder = "Search..." }) => {
             <X className="w-4 h-4 text-gray-500" />
           </Button>
         )}
-        <Button onClick={handleSearch} className="shrink-0 ">
+        <Button onClick={handleSearch} variant="search" className="shrink-0 ">
           <Search className="w-5 h-5"></Search>
         </Button>
       </div>

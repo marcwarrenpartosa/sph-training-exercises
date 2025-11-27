@@ -7,6 +7,7 @@ import Navbar from "./components/navbar.jsx";
 //pages
 import BrowseBooks from "./pages/browseBooks.jsx";
 import BorrowedHistory from "./pages/borrowedHistory.jsx";
+import BrowseMembers from "./pages/browseMembers.jsx";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<BrowseBooks />} />
         <Route path="/borrowed" element={<BorrowedHistory />} />
+        <Route path="/members" element={<BrowseMembers />} />
       </Routes>
     </BrowserRouter>
   );
