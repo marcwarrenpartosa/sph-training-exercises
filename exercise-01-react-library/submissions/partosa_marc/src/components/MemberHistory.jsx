@@ -1,4 +1,5 @@
 import React from "react";
+import Badge from "./badge";
 
 const MemberModal = ({
   selectedMember,
@@ -17,7 +18,7 @@ const MemberModal = ({
     <>
       {isModalOpen && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl border shadow-lg max-w-2xl w-full max-h-[85vh] overflow-hidden">
+          <div className="bg-white rounded-xl shadow-lg max-w-2xl w-full max-h-[85vh] overflow-hidden">
             {/* Header */}
             <div className="px-6 py-4 border-b border-gray-100">
               <div className="flex justify-between items-center">
@@ -25,6 +26,9 @@ const MemberModal = ({
                   <h2 className="text-xl font-semibold text-gray-900">
                     {selectedMember.name}
                   </h2>
+                  <p className="text-sm text-gray-500 mt-1">
+                    Member ID: {selectedMember.id}
+                  </p>
                   <p className="text-sm text-gray-500 mt-1">
                     Member since:{" "}
                     {new Date(
@@ -76,21 +80,18 @@ const MemberModal = ({
                           <h4 className="font-medium text-gray-900 leading-tight">
                             {book?.title || "Unknown Book"}
                           </h4>
-                          <span
-                            className={`px-2 py-1 rounded-full text-xs font-medium ${
-                              transaction.status === "borrowed"
-                                ? isOverdue
-                                  ? "bg-red-100 text-red-700"
-                                  : "bg-blue-100 text-blue-700"
-                                : "bg-green-100 text-green-700"
-                            }`}
-                          >
-                            {transaction.status === "borrowed" && isOverdue
-                              ? "Overdue"
-                              : transaction.status}
-                          </span>
+                          <Badge
+                            status={transaction.status}
+                            isOverdue={isOverdue}
+                          />
                         </div>
                         <div className="space-y-2 text-sm text-gray-600">
+                          <div className="flex justify-between">
+                            <span className="text-gray-500">Book ID:</span>
+                            <span className="font-medium">
+                              {transaction.bookId}
+                            </span>
+                          </div>
                           <div className="flex justify-between">
                             <span className="text-gray-500">Borrowed:</span>
                             <span className="font-medium">
@@ -116,7 +117,7 @@ const MemberModal = ({
                           {transaction.returnDate && (
                             <div className="flex justify-between">
                               <span className="text-gray-500">Returned:</span>
-                              <span className="font-medium text-green-600">
+                              <span className="font-medium text-gray-600">
                                 {new Date(
                                   transaction.returnDate
                                 ).toLocaleDateString()}

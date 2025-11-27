@@ -2,18 +2,12 @@ import React from "react";
 import Logo from "../assets/images/logo.png";
 
 import { Plus, MoreHorizontal } from "lucide-react";
+import { BookOpenText, Users } from "lucide-react";
 
 import { useNavigate } from "react-router-dom";
 
 //components
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "./dropdown";
-import Button from "./button";
-import { ButtonGroup } from "./buttonGroup";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "./tabs.jsx";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -24,6 +18,10 @@ const Navbar = () => {
 
   const navigateToBorrowedBooks = () => {
     navigate("/borrowed");
+  };
+
+  const navigateToMembers = () => {
+    navigate("/members");
   };
 
   return (
@@ -42,31 +40,16 @@ const Navbar = () => {
           <div className="hidden sm:flex sm:items-center sm:gap-3"></div>
         </div>
 
-        <div className="flex items-center">
-          <ButtonGroup>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="outline"
-                  className="flex items-center gap-1 bg-white border-gray-200 hover:bg-gray-50 px-2 sm:px-3"
-                >
-                  <Plus className="w-4 h-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem>Book</DropdownMenuItem>
-                <DropdownMenuItem>Author</DropdownMenuItem>
-                <DropdownMenuItem>Member</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <Button
-              variant="outline"
-              className="bg-white border-gray-200 hover:bg-gray-50 px-2 sm:px-3"
-            >
-              <MoreHorizontal className="w-4 h-4" />
-            </Button>
-          </ButtonGroup>
-        </div>
+        <Tabs defaultValue="books" className="flex items-center">
+          <TabsList className="flex gap-2">
+            <TabsTrigger value="books" onClick={navigateToAllBooks}>
+              <BookOpenText className="w-4 h-4" />
+            </TabsTrigger>
+            <TabsTrigger value="members" onClick={navigateToMembers}>
+              <Users className="w-4 h-4" />
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
       </div>
     </div>
   );
