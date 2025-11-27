@@ -4,13 +4,20 @@ import Logo from "../assets/images/logo.png";
 import { Plus, MoreHorizontal } from "lucide-react";
 import { BookOpenText, Users } from "lucide-react";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 //components
 import { NavbarTabs, NavbarTabsList, NavbarTabsTrigger } from "./tabs.jsx";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Determine active tab based on current route
+  const getActiveTab = () => {
+    if (location.pathname === "/members") return "members";
+    return "books"; // Default to books for "/" and "/borrowed"
+  };
 
   const navigateToAllBooks = () => {
     navigate("/");
@@ -40,7 +47,7 @@ const Navbar = () => {
           <div className="hidden sm:flex sm:items-center sm:gap-3"></div>
         </div>
 
-        <NavbarTabs defaultValue="books" className="flex items-center">
+        <NavbarTabs value={getActiveTab()} className="flex items-center">
           <NavbarTabsList className="flex gap-2">
             <NavbarTabsTrigger value="books" onClick={navigateToAllBooks}>
               <BookOpenText className="w-4 h-4" />

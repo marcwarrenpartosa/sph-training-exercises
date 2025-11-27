@@ -1,23 +1,58 @@
-import React, { useState, useEffect } from "react";
-import fetchMembers from "../services/fetchMembers.js";
-import SearchBar from "../components/searchBar.jsx";
-import Avatar from "../components/avatar.jsx";
+import React, { useState } from "react";
+import { MemberCard } from "../components/card";
+import MemberModal from "../components/MemberHistory";
+import SearchBar from "../components/searchBar";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/tabs";
+import fetchMembers from "../services/fetchMembers";
+import fetchBooks from "../services/fetchBooks";
+import fetchTransactions from "../services/fetchTransactions";
 
 const BrowseMembers = () => {
-  const [members, setMembers] = useState([]);
+  const [selectedMember, setSelectedMember] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [activeTab, setActiveTab] = useState("all");
 
-  useEffect(() => {
-    const membersData = fetchMembers();
-    setMembers(membersData);
-  }, []);
+  // Fetch data
+  const membersData = fetchMembers() || [];
+  const transactionsData = fetchTransactions() || [];
+  const booksData = fetchBooks() || [];
 
-  // Filter members by search term
-  const filteredMembers = members.filter(
-    (member) =>
-      member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      member.id.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Get members with active borrows
+  const getMembersWithActiveBookings = () => {
+    const activeTransactions = transactionsData.filter(
+      (transaction) => transaction.status === "borrowed"
+    );
+    const activeBorrowerIds = new Set(
+      activeTransactions.map((transaction) => transaction.memberId)
+    );
+    return activeBorrowerIds;
+  };
+
+  const activeBorrowerIds = getMembersWithActiveBookings();
+
+  // Filter members based on search term and tab selection
+  const filteredMembers = membersData.filter((member) => {
+    const matchesSearch = member.name
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    const isActiveBorrower = activeBorrowerIds.has(member.id);
+
+    if (activeTab === "active") {
+      return matchesSearch && isActiveBorrower;
+    }
+    return matchesSearch;
+  });
+
+  const handleMemberClick = (member) => {
+    setSelectedMember(member);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedMember(null);
+  };
 
   const handleSearch = (query) => {
     setSearchTerm(query);
@@ -29,60 +64,54 @@ const BrowseMembers = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="w-full px-4 py-8">
-        <div className="max-w-7xl mx-auto">
-          <SearchBar
-            onSearch={handleSearch}
-            onClear={handleClear}
-            placeholder="Search for members..."
-            hideDropdown={true}
-          />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <SearchBar
+          onSearch={handleSearch}
+          onClear={handleClear}
+          placeholder="Search members by name..."
+          hideDropdown={true}
+        />
 
-          {/* Search Results Indicator */}
-          {searchTerm && (
-            <div className="text-center mb-6">
-              <p className="text-gray-600 text-sm">
-                Displaying search results for "{searchTerm}"
-              </p>
-            </div>
-          )}
+        {/* Member Categories */}
+        <div className="mb-6 w-full overflow-x-auto scrollbar-hide">
+          <Tabs
+            value={activeTab}
+            onValueChange={setActiveTab}
+            className="w-full"
+          >
+            <TabsList className="flex w-max mx-auto gap-2 px-4">
+              <TabsTrigger value="all">All Members</TabsTrigger>
+              <TabsTrigger value="active">Active Borrowers</TabsTrigger>
+            </TabsList>
+          </Tabs>
+        </div>
 
-          {/* Members Grid */}
-          {filteredMembers.length === 0 ? (
-            <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">No members found</p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {filteredMembers.map((member) => (
-                <div
-                  key={member.id}
-                  className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 p-6 border border-gray-200"
-                >
-                  <Avatar name={member.name} className="mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold text-gray-900 text-center mb-2">
-                    {member.name}
-                  </h3>
-                  <div className="space-y-2 text-sm text-gray-600">
-                    <p className="flex justify-between">
-                      <span className="font-medium">Member ID:</span>
-                      <span className="text-blue-600 font-mono">
-                        {member.id}
-                      </span>
-                    </p>
-                    <p className="flex justify-between">
-                      <span className="font-medium">Joined:</span>
-                      <span>
-                        {new Date(member.membershipDate).toLocaleDateString()}
-                      </span>
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+        <div className="flex justify-between items-center mb-6">
+          <div className="text-sm text-gray-600">
+            {activeTab === "active"
+              ? `${filteredMembers.length} active borrowers`
+              : `${filteredMembers.length} members`}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {filteredMembers.map((member) => (
+            <MemberCard
+              key={member.id}
+              member={member}
+              onClick={handleMemberClick}
+            />
+          ))}
         </div>
       </div>
+
+      <MemberModal
+        selectedMember={selectedMember}
+        isModalOpen={isModalOpen}
+        onClose={handleCloseModal}
+        transactions={transactionsData}
+        books={booksData}
+      />
     </div>
   );
 };

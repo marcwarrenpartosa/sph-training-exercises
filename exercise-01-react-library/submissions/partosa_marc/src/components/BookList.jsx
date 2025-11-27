@@ -24,6 +24,11 @@ const BookList = () => {
 
   const bookCategories = getBookCategories(books);
 
+  // Utility function to count books by author
+  const getAuthorBookCount = (authorId) => {
+    return books.filter((book) => book.authorId === authorId).length;
+  };
+
   // Filter books by both search term and category
   const filteredBooks = searchBooks(books, searchTerm).filter((book) => {
     if (activeCategory === "all") return true;
@@ -81,13 +86,17 @@ const BookList = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 px-4">
-            {filteredBooks.map((book) => (
-              <BookCard
-                key={book.id}
-                book={book}
-                author={getAuthorById(book.authorId, authors)}
-              />
-            ))}
+            {filteredBooks.map((book) => {
+              const author = getAuthorById(book.authorId, authors);
+              return (
+                <BookCard
+                  key={book.id}
+                  book={book}
+                  author={author}
+                  authorBookCount={author ? getAuthorBookCount(author.id) : 0}
+                />
+              );
+            })}
           </div>
         )}
       </div>

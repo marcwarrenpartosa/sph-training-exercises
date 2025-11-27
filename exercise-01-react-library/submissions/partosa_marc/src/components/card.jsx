@@ -4,6 +4,8 @@ import React from "react";
 import { Clock } from "lucide-react";
 
 import isBookOverdue from "../utils/overdueChecker";
+import Avatar from "./avatar";
+import { Popover, PopoverTrigger, PopoverContent } from "./popover";
 
 // Simple utility function for conditional class names
 const cn = (...classes) => classes.filter(Boolean).join(" ");
@@ -108,12 +110,78 @@ function CardFooter({ className, ...props }) {
   );
 }
 
+// Author Avatar component with image handling
+const AuthorAvatar = ({ author }) => {
+  const defaultImage = "https://via.placeholder.com/40x40?text=?";
+
+  const getAuthorImageUrl = (imagePath) => {
+    if (!imagePath) return defaultImage;
+
+    if (imagePath.startsWith("http")) return imagePath;
+
+    try {
+      if (imagePath.startsWith("../assets/")) {
+        const assetPath = imagePath.replace("../assets/", "/src/assets/");
+        return new URL(assetPath, import.meta.url).href;
+      }
+
+      return imagePath;
+    } catch (error) {
+      return defaultImage;
+    }
+  };
+
+  const handleImageError = (e) => {
+    if (e.target.src !== defaultImage) {
+      e.target.src = defaultImage;
+    }
+  };
+
+  return (
+    <img
+      src={getAuthorImageUrl(author.image)}
+      alt={author.name}
+      className="w-10 h-10 rounded-full object-cover border-2 border-gray-200"
+      onError={handleImageError}
+    />
+  );
+};
+
+// Author Popover Component
+const AuthorPopover = ({ author, bookCount }) => {
+  if (!author) return null;
+
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <p className="text-xs text-gray-600 mb-3 h-4 truncate hover:underline cursor-pointer">
+          {author.name || "Unknown Author"}
+        </p>
+      </PopoverTrigger>
+      <PopoverContent className="w-64 p-3">
+        <div className="flex items-center gap-3">
+          <AuthorAvatar author={author} />
+          <div className="flex-1 min-w-0">
+            <h4 className="font-semibold text-gray-900 text-sm truncate">
+              {author.name}
+            </h4>
+            <p className="text-xs text-gray-600">
+              {bookCount} {bookCount === 1 ? "book" : "books"} in library
+            </p>
+          </div>
+        </div>
+      </PopoverContent>
+    </Popover>
+  );
+};
+
 const BookCard = ({
   book,
   author,
   borrowedBy = null,
   expectedReturnDate = null,
   onMemberClick = null,
+  authorBookCount = 0,
 }) => {
   const defaultImage = "https://via.placeholder.com/300x400?text=No+Image";
 
@@ -171,9 +239,7 @@ const BookCard = ({
           <h3 className="font-semibold text-gray-900 text-sm leading-tight mb-1 h-8 line-clamp-2">
             {book.title}
           </h3>
-          <p className="text-xs text-gray-600 mb-3 h-4 truncate">
-            {author?.name || "Unknown Author"}
-          </p>
+          <AuthorPopover author={author} bookCount={authorBookCount} />
         </div>
 
         <div className="space-y-1.5 text-xs mt-auto">
@@ -211,6 +277,30 @@ const BookCard = ({
   );
 };
 
+const MemberCard = ({ member, onClick }) => {
+  return (
+    <div
+      className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 p-6 border border-gray-200 cursor-pointer"
+      onClick={() => onClick && onClick(member)}
+    >
+      <Avatar name={member.name} className="mx-auto mb-4" />
+      <h3 className="text-lg font-semibold text-gray-900 text-center mb-2">
+        {member.name}
+      </h3>
+      <div className="space-y-2 text-sm text-gray-600">
+        <p className="flex justify-between">
+          <span className="font-medium">Member ID:</span>
+          <span className="text-gray-600 font-mono">{member.id}</span>
+        </p>
+        <p className="flex justify-between">
+          <span className="font-medium">Joined:</span>
+          <span>{new Date(member.membershipDate).toLocaleDateString()}</span>
+        </p>
+      </div>
+    </div>
+  );
+};
+
 export {
   Card,
   CardHeader,
@@ -219,6 +309,7 @@ export {
   CardAction,
   CardDescription,
   CardContent,
+  MemberCard,
 };
 
 //Custom Components

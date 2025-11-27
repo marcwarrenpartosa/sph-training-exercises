@@ -28,6 +28,11 @@ const BorrowedBooks = () => {
   const [selectedMember, setSelectedMember] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // Utility function to count books by author
+  const getAuthorBookCount = (authorId) => {
+    return books.filter((book) => book.authorId === authorId).length;
+  };
+
   // Filter transactions to get only borrowed books
   const borrowedTransactions = transactions.filter(
     (transaction) =>
@@ -116,15 +121,17 @@ const BorrowedBooks = () => {
               const borrowedByMember = members.find(
                 (member) => member.id === borrowTransaction?.memberId
               );
+              const author = getAuthorById(book.authorId, authors);
 
               return (
                 <BookCard
                   key={book.id}
                   book={book}
-                  author={getAuthorById(book.authorId, authors)}
+                  author={author}
                   borrowedBy={borrowedByMember}
                   expectedReturnDate={borrowTransaction?.expectedReturnDate}
                   onMemberClick={handleMemberClick}
+                  authorBookCount={author ? getAuthorBookCount(author.id) : 0}
                 />
               );
             })}
