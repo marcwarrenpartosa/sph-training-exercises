@@ -1,0 +1,33 @@
+.blogImage {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.blogTitle {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.blogAuthor {
+  font-size: 14px;
+  color: #6b6b6b;
+  margin-bottom: 24px;
+}
+
+.blogDescription {
+  font-size: 16px;
+  color: #1a1a1a;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.blogContent {
+  font-size: 16px;
+  color: #1a1a1a;
+  line-height: 1.6;
+}
