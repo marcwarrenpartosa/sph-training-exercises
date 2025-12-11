@@ -1,0 +1,104 @@
+
+
+[
+  {
+    "id": "b1",
+    "title": "The Rise of Young Stars in European Football",
+    "description": "A look at the new generation of football talent dominating Europe's top leagues.",
+    "content": "European football has seen a surge of young stars making major impacts. These players are reshaping tactics and elevating the level of play across major competitions...",
+    "tags": ["football"],
+    "date": "2024-01-10",
+    "image": "b1.webp",
+    "author": "a1"
+  },
+  {
+    "id": "b2",
+    "title": "How Strength Training Improves Basketball Performance",
+    "description": "Why athletes at every level should incorporate strength training.",
+    "content": "Strength training enhances speed, explosiveness, and overall athleticism in basketball players. Modern programs focus on agility and power to improve performance...",
+    "tags": ["basketball"],
+    "date": "2024-01-22",
+    "image": "b2.webp",
+    "author": "a2"
+  },
+  {
+    "id": "b3",
+    "title": "The Evolution of Tennis Rackets",
+    "description": "From wooden frames to carbon fiber — how tennis gear has changed the sport.",
+    "content": "Tennis rackets have evolved dramatically over time, shifting from heavy wooden frames to lightweight composite materials that offer better control and power...",
+    "tags": ["tennis"],
+    "date": "2024-02-05",
+    "image": "b3.webp",
+    "author": "a3"
+  },
+  {
+    "id": "b4",
+    "title": "Top 5 Training Tips for Beginner Runners",
+    "description": "How new runners can safely build endurance and improve speed.",
+    "content": "Beginner runners benefit from gradual training plans, proper footwear, and recovery routines. Consistency is key to sustainable improvement...",
+    "tags": ["running"],
+    "date": "2024-03-01",
+    "image": "b4.webp",
+    "author": "a4"
+  },
+  {
+    "id": "b5",
+    "title": "The Mental Game: Psychology in Boxing",
+    "description": "A look at how mindset and mental strength shape a boxer's success.",
+    "content": "Boxing requires not only physical dominance but also emotional control and mental resilience. Visualization and focus are crucial components of elite performance...",
+    "tags": ["boxing"],
+    "date": "2024-02-18",
+    "image": "b5.webp",
+    "author": "a5"
+  },
+  {
+    "id": "b6",
+    "title": "Why Cycling Is One of the Best Full-Body Workouts",
+    "description": "A breakdown of the physical benefits of daily cycling.",
+    "content": "Cycling builds endurance, strengthens the lower body, and improves cardiovascular health. It's low-impact but incredibly effective for overall fitness...",
+    "tags": ["cycling"],
+    "date": "2024-03-10",
+    "image": "b6.webp",
+    "author": "a6"
+  },
+  {
+    "id": "b7",
+    "title": "How Video Review Technology Has Changed Modern Football",
+    "description": "Analyzing the impact of VAR on fairness and decision-making.",
+    "content": "VAR has introduced unprecedented accuracy in key football decisions, although it comes with controversies. It has significantly changed the tempo and dynamics of the sport...",
+    "tags": ["football"],
+    "date": "2024-01-29",
+    "image": "b7.webp",
+    "author": "a7"
+  },
+  {
+    "id": "b8",
+    "title": "Why Recovery Days Matter for Weightlifters",
+    "description": "Rest is essential for building strength and preventing injuries.",
+    "content": "Weightlifters rely heavily on muscle recovery to increase strength and prevent overtraining. Proper rest, hydration, and nutrition are key to progress...",
+    "tags": ["weightlifting"],
+    "date": "2024-02-25",
+    "image": "b8.webp",
+    "author": "a8"
+  },
+  {
+    "id": "b9",
+    "title": "The Most Iconic Moments in Olympic Gymnastics",
+    "description": "A recap of legendary performances that defined the sport.",
+    "content": "Olympic gymnastics has produced unforgettable feats of athleticism, precision, and artistry. These moments captured global attention and shaped the sport’s history...",
+    "tags": ["gymnastics"],
+    "date": "2024-02-12",
+    "image": "b9.webp",
+    "author": "a9"
+  },
+  {
+    "id": "b10",
+    "title": "The Science Behind Faster Swimming",
+    "description": "How technique and body position influence speed in water.",
+    "content": "Swimming performance relies on reducing drag, improving stroke efficiency, and optimizing breathing technique. Biomechanics plays a major role in mastering speed...",
+    "tags": ["swimming"],
+    "date": "2024-03-14",
+    "image": "b10.webp",
+    "author": "a10"
+  }
+]
