@@ -65,7 +65,11 @@ export default function Homepage() {
           />
         </div>
         <div className={styles.blogList}>
-          {renderedBlogs}
+          {filteredBlogs.length === 0 ? (
+            <p className={styles.noBlogsMessage}>No blogs found matching your search criteria.</p>
+          ) : (
+            renderedBlogs
+          )}
         </div>
       </div>
     </div>

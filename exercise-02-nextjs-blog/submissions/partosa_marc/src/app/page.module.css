@@ -32,6 +32,13 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  color: rgb(51, 51, 51);
+
+}
+
+.noBlogsMessage {
+  text-align: center;
+  margin: 2rem 0;
 }
 
 @media (max-width: 600px) {
