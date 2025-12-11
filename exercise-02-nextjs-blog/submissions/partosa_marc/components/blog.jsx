@@ -15,13 +15,13 @@ export default function Blog({ blog }) {
             alt={blog.title}
             width={800}
             height={450}
+            style={{ objectFit: "cover" }}
           />
         )}
         <h2>{blog.title}</h2>
+        <p>{blog.description}</p>
+        <p style={{ fontSize: "13px", color: "#999" }}>By {blog.authorName}</p>
       </Link>
-
-      <p>By: {blog.authorName}</p>
-      <p>{blog.description}</p>
     </div>
   );
 }

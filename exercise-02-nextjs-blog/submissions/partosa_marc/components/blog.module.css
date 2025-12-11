@@ -1,0 +1,44 @@
+.blogCard {
+  background-color: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.blogCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+.blogCard h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 20px 24px 8px;
+  line-height: 1.3;
+}
+
+.blogCard p {
+  font-size: 14px;
+  color: #6b6b6b;
+  margin: 8px 24px;
+  line-height: 1.6;
+}
+
+.blogCard p:last-child {
+  margin-bottom: 20px;
+}
+
+.blogCard a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.blogCard img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
