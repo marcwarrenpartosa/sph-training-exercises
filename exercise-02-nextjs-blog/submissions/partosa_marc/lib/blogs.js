@@ -25,3 +25,15 @@ export function getBlogDetailsById(id) {
       authorName: author ? author.name : "Unknown"
     };
 }
+
+
+export function getBlogFilters() {
+  const years = [...new Set(blogs.map(blog => new Date(blog.date).getFullYear()))];
+
+  const tags = [...new Set(blogs.flatMap(blog => blog.tags))];
+  
+  return {
+    years: years.sort((a, b) => b - a), // Sort years descending
+    tags: tags.sort() // Sort tags alphabetically
+  };
+}
