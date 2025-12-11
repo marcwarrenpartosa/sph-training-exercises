@@ -52,7 +52,7 @@ export default function Homepage() {
   return (
     <div className={styles.page}>
       <div className={styles.container}>
-        <h1 className={styles.title}>Blog</h1>
+        <h1 className={styles.title}>SPORTS BLOGS</h1>
         <div className={styles.searchContainer}>
           <SearchBar onSearch={setSearchQuery} />
           <FilterPopover 

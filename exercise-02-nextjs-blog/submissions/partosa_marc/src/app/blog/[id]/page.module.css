@@ -1,39 +1,63 @@
 .blogImage {
   width: 100%;
   height: auto;
-  border-radius: 12px;
-  margin-bottom: 24px;
+  border-radius: 16px;
+  margin-bottom: 32px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blogImage:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
 .blogTitle {
-  font-size: 32px;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 16px;
-  line-height: 1.2;
+  font-size: 40px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #1a1a1a 0%, #333333 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
 .blogAuthor {
   font-size: 14px;
   color: #6b6b6b;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
   cursor: pointer;
-  transition: text-decoration 0.2s ease;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: rgba(107, 107, 107, 0.05);
+  display: inline-block;
 }
 
 .blogAuthor:hover {
-  text-decoration: underline;
+  color: #2563eb;
+  background: rgba(37, 99, 235, 0.1);
+  transform: translateY(-1px);
 }
 
 .blogDescription {
-  font-size: 16px;
-  color: #1a1a1a;
-  line-height: 1.6;
-  margin-bottom: 24px;
+  font-size: 18px;
+  color: #4a4a4a;
+  line-height: 1.7;
+  margin-bottom: 32px;
+  padding: 24px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 12px;
+  border-left: 4px solid #ffffff;
+  font-weight: 400;
 }
 
 .blogContent {
   font-size: 16px;
   color: #1a1a1a;
-  line-height: 1.6;
+  line-height: 1.8;
+  padding: 24px 0;
 }
