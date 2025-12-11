@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import styles from '../../page.module.css';
 import blogStyles from './page.module.css';
 
@@ -23,9 +24,11 @@ export default async function BlogDetailsPage({ params }) {
                     />
                 )}
                 <h1 className={blogStyles.blogTitle}>{blog.title}</h1>
-                <p className={blogStyles.blogAuthor}>
-                    By: {blog.authorName}
-                </p>
+                <Link href={`/author/${blog.author}`}>
+                    <p className={blogStyles.blogAuthor}>
+                        By: {blog.authorName}
+                    </p>
+                </Link>
                 <p className={blogStyles.blogDescription}>
                     {blog.description}
                 </p>

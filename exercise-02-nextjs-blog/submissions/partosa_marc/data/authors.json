@@ -1,43 +1,62 @@
 [
-    {
-      "id": "a1",
-      "name": "Marcus Reed"
-    },
-    {
-      "id": "a2",
-      "name": "Jamal Carter"
-    },
-    {
-      "id": "a3",
-      "name": "Sophie Lang"
-    },
-    {
-      "id": "a4",
-      "name": "Claire Mitchell"
-    },
-    {
-      "id": "a5",
-      "name": "Antonio Ramirez"
-    },
-    {
-      "id": "a6",
-      "name": "Hannah Ford"
-    },
-    {
-      "id": "a7",
-      "name": "Daniel Kovac"
-    },
-    {
-      "id": "a8",
-      "name": "Maya Chen"
-    },
-    {
-      "id": "a9",
-      "name": "Elena Petrova"
-    },
-    {
-      "id": "a10",
-      "name": "Tom Stevens"
-    }
-  ]
-  
+  {
+    "id": "a1",
+    "name": "Marcus Reed",
+    "image": "a1.webp",
+    "bio": "Sports journalist and analytics writer covering pro football, basketball, and emerging sports tech. Known for breaking down complex stats into fan-friendly insights."
+  },
+  {
+    "id": "a2",
+    "name": "Jamal Carter",
+    "image": "a2.webp",
+    "bio": "Former college athlete turned sports analyst who specializes in game strategy, player development, and behind-the-scenes stories across major leagues."
+  },
+  {
+    "id": "a3",
+    "name": "Sophie Lang",
+    "image": "a3.webp",
+    "bio": "Sports lifestyle writer focusing on fan culture, stadium experiences, athlete branding, and the intersection of sports and social trends."
+  },
+  {
+    "id": "a4",
+    "name": "Claire Mitchell",
+    "image": "a4.webp",
+    "bio": "Data-driven sports analyst who uses advanced metrics to break down player performance, team efficiency, and predictive game modeling."
+  },
+  {
+    "id": "a5",
+    "name": "Antonio Ramirez",
+    "image": "a5.webp",
+    "bio": "Coverage specialist for international soccer and combat sports, bringing a global perspective on athletes, rivalries, and rising stars."
+  },
+  {
+    "id": "a6",
+    "name": "Hannah Ford",
+    "image": "a6.webp",
+    "bio": "Fitness and training contributor focusing on athlete conditioning, recovery techniques, and performance optimization."
+  },
+  {
+    "id": "a7",
+    "name": "Daniel Kovac",
+    "image": "a7.webp",
+    "bio": "Sports security and integrity writer covering issues such as anti-doping policies, fair play, and the technology safeguarding major sporting events."
+  },
+  {
+    "id": "a8",
+    "name": "Maya Chen",
+    "image": "a8.webp",
+    "bio": "Sports business and management analyst reporting on team operations, league economics, athlete marketing, and industry trends."
+  },
+  {
+    "id": "a9",
+    "name": "Elena Petrova",
+    "image": "a9.webp",
+    "bio": "In-depth analyst specializing in team strategy, defensive schemes, and long-form breakdowns of key matchups across multiple sports."
+  },
+  {
+    "id": "a10",
+    "name": "Tom Stevens",
+    "image": "a10.webp",
+    "bio": "Veteran sports writer known for storytelling, player interviews, and simplifying complex game concepts for casual and dedicated fans alike."
+  }
+]

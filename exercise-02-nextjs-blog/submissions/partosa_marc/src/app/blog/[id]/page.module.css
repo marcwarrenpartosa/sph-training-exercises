@@ -17,6 +17,12 @@
   font-size: 14px;
   color: #6b6b6b;
   margin-bottom: 24px;
+  cursor: pointer;
+  transition: text-decoration 0.2s ease;
+}
+
+.blogAuthor:hover {
+  text-decoration: underline;
 }
 
 .blogDescription {
