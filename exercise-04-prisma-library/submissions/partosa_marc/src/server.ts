@@ -49,9 +49,14 @@ app.get("/query1", async (req: Request, res: Response) => {
 
 // Get all posts
 // also returns categories for each post
+// added pagination 2 posts per page
 app.get("/query2", async (req: Request, res: Response) => {
   try {
-    const posts = await getAllPosts();
+    const page = req.query.page ? parseInt(req.query.page as string, 10) : 1;
+
+    const limit = 2;
+
+    const posts = await getAllPosts({ page, limit });
     res.json(posts);
   } catch (error) {
     console.error("Failed to fetch posts:", error);
