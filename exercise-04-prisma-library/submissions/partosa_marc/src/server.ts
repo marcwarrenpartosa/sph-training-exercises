@@ -9,6 +9,7 @@ import getPostsWithAuthors from "./posts/getPostsWithAuthors";
 import getAllPosts from "./posts/getAllPosts";
 import getPostsFromUser from "./posts/getPostsFromUser";
 import getCountOfUserPosts from "./posts/getCountOfUserPosts";
+import getPostsByCategoryAndStatus from "./posts/getPostsByCategoryAndStatus";
 
 dotenv.config();
 
@@ -84,6 +85,22 @@ app.get("/query4/:userId", async (req: Request, res: Response) => {
   }
 });
 
+
+// filter post by category or published status 
+//status is 1 for published, 0 for unpublished
+app.get("/query5/filter/:categoryId/:status", async (req: Request, res: Response) => {
+  try {
+    const categoryId = parseInt(req.params.categoryId, 10);
+    const status = parseInt(req.params.status, 10);
+
+    const posts = await getPostsByCategoryAndStatus({ categoryId, status });
+
+    res.json(posts);
+  } catch (error) {
+    console.error("Failed to fetch posts:", error);
+    res.status(500).send("Failed to fetch posts");
+  }
+});
 
 
 
