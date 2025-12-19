@@ -34,7 +34,8 @@ app.get("/", async (req: Request, res: Response) => {
   }
 });
 
-// Get all posts with authors
+// Get all posts with authors 
+// also returns categories for each post
 app.get("/query1", async (req: Request, res: Response) => {
   try {
     const posts = await getPostsWithAuthors();
@@ -46,6 +47,7 @@ app.get("/query1", async (req: Request, res: Response) => {
 });
 
 // Get all posts
+// also returns categories for each post
 app.get("/query2", async (req: Request, res: Response) => {
   try {
     const posts = await getAllPosts();
@@ -57,6 +59,7 @@ app.get("/query2", async (req: Request, res: Response) => {
 });
 
 // Get all post from user
+// also returns categories for each post
 app.get("/query3/:userId", async (req: Request, res: Response) => {
   try {
     const userId = parseInt(req.params.userId, 10);
