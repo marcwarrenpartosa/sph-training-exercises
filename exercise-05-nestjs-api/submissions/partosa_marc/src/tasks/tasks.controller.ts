@@ -1,7 +1,7 @@
-import { Controller, Get, Post, Delete, Put, Param, Body, Headers, UnauthorizedException } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Put, Param, Body, Headers, UnauthorizedException, Query } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { UsersService } from '../users/users.service';
-import type { Task } from './tasks.service';
+import type { Task, PaginatedTasks } from './tasks.service';
 
 
 @Controller('tasks')
@@ -28,9 +28,15 @@ export class TasksController {
     }
 
     @Get()
-    getAllTasks(@Headers('authorization') authorization: string): Task[] {
+    getAllTasks(
+        @Headers('authorization') authorization: string,
+        @Query('page') page?: string,
+        @Query('limit') limit?: string
+    ): PaginatedTasks {
         this.verifyAuthorization(authorization);
-        return this.tasksService.getAllTasks();
+        const pageNum = page ? parseInt(page, 10) : 1;
+        const limitNum = limit ? parseInt(limit, 10) : 10;
+        return this.tasksService.getAllTasks(pageNum, limitNum);
     }
 
     @Get('status/:status')
