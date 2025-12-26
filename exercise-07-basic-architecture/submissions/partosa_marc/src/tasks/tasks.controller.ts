@@ -1,7 +1,9 @@
 import { Controller, Get, Post, Delete, Put, Param, Body, Headers, UnauthorizedException, Query } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { UsersService } from '../users/users.service';
-import type { Task, PaginatedTasks } from './tasks.service';
+import ReadTaskDto, { PaginatedTasksDto } from './dto/read-task.dto';
+import CreateTaskDto from './dto/create-task.dto';
+import UpdateTaskDto from './dto/update-task.dto';
 
 
 @Controller('tasks')
@@ -32,7 +34,7 @@ export class TasksController {
         @Headers('authorization') authorization: string,
         @Query('page') page?: string,
         @Query('limit') limit?: string
-    ): PaginatedTasks {
+    ): PaginatedTasksDto {
         this.verifyAuthorization(authorization);
         const pageNum = page ? parseInt(page, 10) : 1;
         const limitNum = limit ? parseInt(limit, 10) : 10;
@@ -40,19 +42,19 @@ export class TasksController {
     }
 
     @Get('status/:status')
-    getTasksByStatus(@Param('status') status: string, @Headers('authorization') authorization: string): Task[] {
+    getTasksByStatus(@Param('status') status: string, @Headers('authorization') authorization: string): ReadTaskDto[] {
         this.verifyAuthorization(authorization);
        return this.tasksService.getTasksByStatus(status);
     }
 
     @Get(':id')
-    getTaskById(@Param('id') id: string, @Headers('authorization') authorization: string): Task | undefined {
+    getTaskById(@Param('id') id: string, @Headers('authorization') authorization: string): ReadTaskDto | undefined {
         this.verifyAuthorization(authorization);
         return this.tasksService.getTaskById(id);
     }
 
     @Post()
-    createTask(@Body() task: Task, @Headers('authorization') authorization: string): Task {
+    createTask(@Body() task: CreateTaskDto, @Headers('authorization') authorization: string): CreateTaskDto {
        this.verifyAuthorization(authorization);
        return this.tasksService.createTask(task);
     }
@@ -69,7 +71,7 @@ export class TasksController {
     }
 
     @Put(':id')
-    updateTask(@Param('id') id: string, @Body() updatedTask: Partial<Task>, @Headers('authorization') authorization: string): Task | undefined {
+    updateTask(@Param('id') id: string, @Body() updatedTask: Partial<UpdateTaskDto>, @Headers('authorization') authorization: string): UpdateTaskDto | undefined {
         const task = this.tasksService.getTaskById(id);
         if (!task) {
             throw new UnauthorizedException('Task not found');

@@ -3,17 +3,13 @@ import { IsString, IsOptional } from 'class-validator';
 export default class UpdateTaskDto {
     @IsOptional()
     @IsString()
-    title: string;
+    title?: string;
 
     @IsOptional()
     @IsString()
-    description: string;
+    description?: string;
 
     @IsOptional()
     @IsString()
-    status: string;
-
-    @IsOptional()
-    @IsString()
-    userId: string;
+    status?: string;
 }
