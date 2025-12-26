@@ -1,15 +1,10 @@
 import { Injectable } from '@nestjs/common';
-
-export type Task = {
-    id: string; 
-    title: string;
-    description: string;
-    status: string;
-    userId: string;
-}
+import CreateTaskDto from './dto/create-task.dto';
+import UpdateTaskDto from './dto/update-task.dto';
+import ReadTaskDto from './dto/read-task.dto';
 
 export type PaginatedTasks = {
-    data: Task[];
+    data: CreateTaskDto[];
     total: number;
     page: number;
     limit: number;
@@ -18,7 +13,7 @@ export type PaginatedTasks = {
 
 @Injectable()
 export class TasksService {
-    private tasks: Task[] = [ 
+    private tasks: CreateTaskDto[] = [ 
         {id: '1', title: "Task One", description: "This is task one desc", status: "PENDING", userId: "1"},
         {id: '2', title: "Task Two", description: "This is task two desc", status: "IN_PROGRESS", userId: "2"},
         {id: '3', title: "Task Three", description: "This is task three desc", status: "DONE", userId: "3"},
@@ -43,15 +38,15 @@ export class TasksService {
         };
     }
 
-    getTaskById(id: string): Task | undefined {
+    getTaskById(id: string): ReadTaskDto | undefined {
         return this.tasks.find(task => task.id === id);
     }
 
-    getTasksByStatus(status: string): Task[] {
+    getTasksByStatus(status: string): ReadTaskDto[] {
         return this.tasks.filter(task => task.status === status);
     }
 
-    createTask(task: Task): Task {
+    createTask(task: CreateTaskDto): CreateTaskDto {
         this.tasks.push(task);
         return task;
     }
@@ -62,7 +57,7 @@ export class TasksService {
         return this.tasks.length < initialLength;
     }
 
-    updateTask(id: string, updatedTask: Partial<Task>): Task | undefined {
+    updateTask(id: string, updatedTask: Partial<UpdateTaskDto>): UpdateTaskDto | undefined {
         const taskIndex = this.tasks.findIndex(task => task.id === id);
         if (taskIndex === -1) {
             return undefined;
